@@ -7,21 +7,29 @@ public class Gun : MonoBehaviour
     public Camera FPCamra;
     public float reange = 100f;
 
-    public ParticleSystem MuzzleFlash;
+    public ParticleSystem part;
+
+    AudioSource audiosource;
+    public AudioClip Audioclip;
+
+     void Start()
+    {
+        audiosource = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
-            MuzzleFlashEffect();
+            part.Play();
+            audiosource.Play();
+                        
         }
     }
 
-    private void MuzzleFlashEffect()
-    {
-        MuzzleFlash.Play();
-    }
+  
     void Shoot()
     {
         RaycastHit hit;
