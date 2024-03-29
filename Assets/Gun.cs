@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
+    
     public Camera FPCamra;
     public float reange = 100f;
+
+    public float Damage = 20f;
 
     public ParticleSystem part;
 
@@ -25,6 +29,7 @@ public class Gun : MonoBehaviour
             Shoot();
             part.Play();
             audiosource.Play();
+
                         
         }
     }
@@ -35,12 +40,24 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(FPCamra.transform.position,FPCamra.transform.forward,out hit,reange))
         {
-            Debug.Log("I hit this thing : " + hit.transform.name);
+            
+            //EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+            //if (target == null) return;
+
+            if(CompareTag("enemy"))
+            {
+                EnemyHealth.instance.TakeDamage(Damage);
+            }
+
+            
         }
         else
         {
             return;
         }
     }
+
+    
+
 
 }

@@ -6,6 +6,12 @@ using UnityEngine.AI;
 
 public class killer_bunny : MonoBehaviour
 {
+    public static killer_bunny instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public GameObject player;
 
@@ -77,6 +83,7 @@ public class killer_bunny : MonoBehaviour
         if (health < 1)
         {
             StopAllCoroutines();
+            Destroy(gameObject);
         }
 
         sound_next_ticks -= 1;
